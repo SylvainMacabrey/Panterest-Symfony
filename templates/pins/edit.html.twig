@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panterest - Modifier l'épingle{% endblock %}
+
+{% block body %}
+
+    <h2> Modifier l'épingle {{ pin.title }} </h2>
+
+	{{ include ('pins/_form.html.twig', {button: 'Modifier'}) }}
+
+    <a href="{{ path('pins.show', { id: pin.id }) }}"> Retour à l'épingle </a>
+    <a href="{{ path('pins.index') }}"> Retour à l'accueil </a>
+
+{% endblock %}

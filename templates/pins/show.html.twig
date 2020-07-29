@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panterest - {{ pin.title }}{% endblock %}
+
+{% block body %}
+
+    <article>
+        <h2>{{ pin.title }}</h2>
+        <p>{{ pin.description }}</p>
+    </article>
+
+    <a href="{{ path('pins.edit', { id: pin.id }) }}"> Modifier </a>
+
+    <form method="POST" action="{{ path('pins.delete', { id: pin.id }) }}" onsubmit="return confirm('Confirmer la suppression')">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete'~pin.id) }}">
+        <button>Supprimer</button>
+    </form>
+
+    <a href="{{ path('pins.index') }}"> Retour à l'accueil </a>
+
+{% endblock %}

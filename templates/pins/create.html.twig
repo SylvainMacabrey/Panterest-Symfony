@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panterest - Création d'une épingle{% endblock %}
+
+{% block body %}
+
+    <h2> Créer une épingle </h2>
+
+	{{ include ('pins/_form.html.twig', {button: 'Créer'}) }}
+
+    <a href="{{ path('pins.index') }}"> Retour à l'accueil </a>
+
+{% endblock %}
