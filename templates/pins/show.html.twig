@@ -4,18 +4,45 @@
 
 {% block body %}
 
-    <article>
-        <h2>{{ pin.title }}</h2>
-        <p>{{ pin.description }}</p>
-        <p>Publiée il y a {{ pin.createdAt|ago }}</p>
-    </article>
+    <div class="card card-cascade wider reverse">
 
-    <a class="btn btn-info" href="{{ path('pins.edit', { id: pin.id }) }}"> Modifier </a>
+        <div class="view view-cascade overlay">
+            <img class="card-img-top" src="{{ (pin.image ? vich_uploader_asset(pin) : asset('images/default/image-par-defaut.jpg')) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ pin.title }}">
+        </div>
 
-    <form method="POST" action="{{ path('pins.delete', { id: pin.id }) }}" onsubmit="return confirm('Confirmer la suppression')">
-        <input type="hidden" name="_method" value="DELETE">
-        <input type="hidden" name="_token" value="{{ csrf_token('delete'~pin.id) }}">
-        <button type="button" class="btn btn-danger">Supprimer</button>
-    </form>
+        <div class="card-body card-body-cascade text-center">
+            <h4 class="card-title"><strong>{{ pin.title }}</strong></h4>
+            <h6 class="font-weight-bold indigo-text py-2">Publié par [autheur]</h6>
+            <p class="card-text">{{ pin.description }}</p>
+            <p class="card-text">Publiée il y a {{ pin.createdAt|ago }}</p>
+            <a class="px-2 fa-lg li-ic"><i class="fa fa-trash" data-toggle="modal" data-target="#confirmDeleteModal"></i></a>
+            <a href="{{ path('pins.edit', { id: pin.id }) }}" class="px-2 fa-lg tw-ic"><i class="fa fa-edit"></i></a>
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Suppression de l'épingle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Etes vous sur de vouloir supprimer l'épingle "<strong>{{ pin.title }}</strong>"
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form method="POST" action="{{ path('pins.delete', { id: pin.id }) }}">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete'~pin.id) }}">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

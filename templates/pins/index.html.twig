@@ -4,19 +4,31 @@
 
 {% block body %}
 
-    <h1>{{ pluralize(pins|length, 'Pin', 'Pins') }}</h1>
-
     {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
+        <div class="alert alert-success"> {{ message }} </div>
     {% endfor %}
 
-    {% for pin in pins %}
-        <article>
-            <h2><a href="{{ path('pins.show', { id: pin.id }) }}"> {{ pin.title }} </a></h2>
-            <p>{{ pin.description|u.truncate(10, '...', false) }}</p>
-        </article>
-    {% endfor %}
+    {% if pins|length > 0 %}
+        <h1 class="text-center text-muted mb-4">{{ pluralize(pins|length, 'Pin', 'Pins') }}</h1>
+
+        <div class="row">
+            {% for pin in pins %}
+                <div class="col-md-4">
+                    <article>
+                        <div class="card" style="margin: 20px 0px;">
+                            <img class="card-img-top" src="{{ (pin.image ? vich_uploader_asset(pin) : asset('images/default/image-par-defaut.jpg')) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ pin.title }}" />
+                            <div class="card-body">
+                                <a href="{{ path('pins.show', { id: pin.id }) }}"> {{ pin.title }} </a>
+                                <p class="card-text">Soumit par [on verra]</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <div class="alert alert-info"> Il n'y a pas d'épingle pour le momment. </div>
+    {% endif %}
 
 {% endblock %}
