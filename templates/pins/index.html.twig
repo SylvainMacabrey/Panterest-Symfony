@@ -6,10 +6,16 @@
 
     <h1>{{ pluralize(pins|length, 'Pin', 'Pins') }}</h1>
 
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     {% for pin in pins %}
         <article>
             <h2><a href="{{ path('pins.show', { id: pin.id }) }}"> {{ pin.title }} </a></h2>
-            <p>{{ pin.description }}</p>
+            <p>{{ pin.description|u.truncate(10, '...', false) }}</p>
         </article>
     {% endfor %}
 

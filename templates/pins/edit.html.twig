@@ -4,11 +4,18 @@
 
 {% block body %}
 
-    <h2> Modifier l'épingle {{ pin.title }} </h2>
+    <div class="row">
 
-	{{ include ('pins/_form.html.twig', {button: 'Modifier'}) }}
+        <div class="col-md-6 mx-auto">
 
-    <a href="{{ path('pins.show', { id: pin.id }) }}"> Retour à l'épingle </a>
-    <a href="{{ path('pins.index') }}"> Retour à l'accueil </a>
+            <h2> Modifier l'épingle {{ pin.title }} </h2>
+
+            {{ include ('pins/_form.html.twig', {button: 'Modifier'}) }}
+
+            <a class="btn btn-secondary btn-block" style="margin-top: 20px" href="{{ path('pins.show', { id: pin.id }) }}"> Retour à l'épingle </a>
+
+        </div>
+
+    </div>
 
 {% endblock %}

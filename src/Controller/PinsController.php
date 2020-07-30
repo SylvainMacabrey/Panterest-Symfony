@@ -45,7 +45,7 @@ class PinsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 			$em->persist($pin);
 			$em->flush();
-			//$this->addFlash('success', 'Création effectuée avec succès');
+			$this->addFlash('success', 'Création effectuée avec succès');
 			return $this->redirectToRoute('pins.index');
         }
         return $this->render('pins/create.html.twig', [
@@ -65,7 +65,7 @@ class PinsController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 			$em->flush();
-			//$this->addFlash('success', 'Modification effectuée avec succès');
+			$this->addFlash('success', 'Modification effectuée avec succès');
 			return $this->redirectToRoute('pins.index');
         }
         return $this->render('pins/edit.html.twig', [
@@ -82,7 +82,7 @@ class PinsController extends AbstractController
         if($this->isCsrfTokenValid('delete' . $pin->getId(), $request->get('_token'))) {
 			$em->remove($pin);
 			$em->flush();
-			//$this->addFlash('success', 'Suppression effectuée avec succès');
+			$this->addFlash('success', 'Suppression effectuée avec succès');
 			return $this->redirectToRoute('pins.index');
         } else {
         	throw new InvalidCsrfTokenException('Invalid CSRF token');

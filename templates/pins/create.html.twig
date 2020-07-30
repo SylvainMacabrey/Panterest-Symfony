@@ -4,10 +4,16 @@
 
 {% block body %}
 
-    <h2> Créer une épingle </h2>
+    <div class="row">
 
-	{{ include ('pins/_form.html.twig', {button: 'Créer'}) }}
+        <div class="col-md-6 mx-auto">
 
-    <a href="{{ path('pins.index') }}"> Retour à l'accueil </a>
+            <h2> Créer une épingle </h2>
+
+            {{ include ('pins/_form.html.twig', {button: 'Créer'}) }}
+
+        </div>
+
+    </div>
 
 {% endblock %}

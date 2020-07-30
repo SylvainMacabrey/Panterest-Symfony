@@ -7,16 +7,15 @@
     <article>
         <h2>{{ pin.title }}</h2>
         <p>{{ pin.description }}</p>
+        <p>Publiée il y a {{ pin.createdAt|ago }}</p>
     </article>
 
-    <a href="{{ path('pins.edit', { id: pin.id }) }}"> Modifier </a>
+    <a class="btn btn-info" href="{{ path('pins.edit', { id: pin.id }) }}"> Modifier </a>
 
     <form method="POST" action="{{ path('pins.delete', { id: pin.id }) }}" onsubmit="return confirm('Confirmer la suppression')">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ csrf_token('delete'~pin.id) }}">
-        <button>Supprimer</button>
+        <button type="button" class="btn btn-danger">Supprimer</button>
     </form>
-
-    <a href="{{ path('pins.index') }}"> Retour à l'accueil </a>
 
 {% endblock %}
